@@ -6,11 +6,11 @@
  * https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/description/
  *
  * algorithms
- * Easy (68.98%)
- * Likes:    288
+ * Easy (69.17%)
+ * Likes:    306
  * Dislikes: 0
- * Total Accepted:    74.3K
- * Total Submissions: 107.7K
+ * Total Accepted:    84.1K
+ * Total Submissions: 121.6K
  * Testcase Example:  '[3,9,20,null,null,15,7]'
  *
  * 给定一个非空二叉树, 返回一个由每层节点平均值组成的数组。
@@ -53,20 +53,20 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var averageOfLevels = function(root) {
+var averageOfLevels = function (root) {
   let res = []
-  if(!root) return res
+  if (!root) return res
   let stack = [root]
   while (stack.length) {
+    let length = stack.length
     let sum = 0
-    let len = stack.length
-    for (let i = 0; i < len; i++) {
+    for (let i = 0; i < length; i++) {
       const node = stack.shift()
-      sum+=node.val
+      sum += node.val
       node.left && stack.push(node.left)
       node.right && stack.push(node.right)
     }
-    res.push(sum/len)
+    res.push(sum / length)
   }
   return res
 };

@@ -95,11 +95,11 @@ var largestValues = function (root) {
   if (!root) return res
   let stack = [root]
   while (stack.length) {
-    let len = stack.length
+    let length = stack.length
     let max = stack[0].val
-    for (let i = 0; i < len; i++) {
+    for (let i = 0; i < length; i++) {
       const node = stack.shift();
-      if (node.val > max) max = node.val
+      max = (node.val > max ? node.val : max)
       node.left && stack.push(node.left)
       node.right && stack.push(node.right)
     }

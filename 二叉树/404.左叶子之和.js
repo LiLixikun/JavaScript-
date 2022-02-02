@@ -46,16 +46,28 @@
 var sumOfLeftLeaves = function (root) {
   let sum = 0
   if (!root) return sum
-  let stack = [root]
-  while (stack.length) {
-    const node = stack.pop();
-    // 左叶子：最左边且没有左右子树
-    if (node.left && node.left.left == null && node.left.right == null) {
-      sum += node.left.val
+  // let stack = [root]
+  // while (stack.length) {
+  //   const node = stack.shift();
+  //   // 子叶子 为 left、right 都为 null、然后通过父节点去判断是左
+  //   if (node.left && node.left.left == null && node.left.right == null) {
+  //     sum += node.left.val
+  //   }
+  //   node.left && stack.push(node.left)
+  //   node.right && stack.push(node.right)
+  // }
+  function dfs(root) {
+    if (!root) return 0
+    let leftSum = dfs(root.left)
+    let rightSum = dfs(root.right)
+    let curVal = 0
+    if (root.left && root.left.left == null && root.left.right == null) {
+      curVal = root.left.val
     }
-    node.right && stack.push(node.right)
-    node.left && stack.push(node.left)
+    sum = leftSum + rightSum + curVal
+    return sum
   }
+  dfs(root)
   return sum
 };
 // @lc code=end

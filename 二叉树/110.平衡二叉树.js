@@ -71,10 +71,18 @@
 var isBalanced = function (root) {
   function getHeight(root) {
     if (!root) return 0
-    return Math.max(getHeight(root.left), getHeight(root.right)) + 1
+    let leftDeep = getHeight(root.left)
+    let rightDeep = getHeight(root.right)
+    if (leftDeep === -1) return -1
+    if (rightDeep === -1) return -1
+    if (Math.abs(leftDeep - rightDeep) > 1) {
+      return -1
+    } else {
+      return Math.max(leftDeep, rightDeep) + 1
+    }
   }
   if (!root) return true
-  return Math.abs(getHeight(root.left) - getHeight(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right)
+  return !(getHeight(root) === -1)
 };
 // @lc code=end
 

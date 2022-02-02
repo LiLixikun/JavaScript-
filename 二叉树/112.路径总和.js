@@ -68,11 +68,34 @@
  * @return {boolean}
  */
 var hasPathSum = function (root, targetSum) {
-  if (!root) return false
-  if (!root.left && !root.right) {
-    return targetSum == root.val
+  if (!root) {
+    return false
   }
-  return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val)
+  // // 叶子节点就是没有 左右的
+  // if (root.left == null && root.right == null) {
+  //   return root.val == targetSum
+  // }
+  // // 前序遍历、用 和 去剪去根的值、让去子节点的值进行对比
+  // return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val)
+  let stack = [root]
+  let sum = [targetSum]
+  while (stack.length) {
+    let node = stack.shift();
+    let curVal = sum.shift() - node.val
+    console.log("node", node.val);
+    if (node.left == null && node.right == null && curVal == 0) {
+      return true
+    }
+    if (node.left) {
+      stack.push(node.left)
+      sum.push(curVal)
+    }
+    if (node.right) {
+      stack.push(node.right)
+      sum.push(curVal)
+    }
+  }
+  return false
 };
 // @lc code=end
 

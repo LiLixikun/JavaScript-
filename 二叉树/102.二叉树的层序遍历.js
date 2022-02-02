@@ -58,16 +58,27 @@ var levelOrder = function (root) {
   if (!root) return res
   let stack = [root]
   while (stack.length) {
-    let arr = []
+    let levelVal = []
     let len = stack.length
     for (let i = 0; i < len; i++) {
       const node = stack.shift()
-      arr.push(node.val)
+      levelVal.push(node.val)
       node.left && stack.push(node.left)
       node.right && stack.push(node.right)
     }
-    res.push(arr)
+    res.push(levelVal)
   }
+
+  // let res = [],
+  //   index = 0;
+  // function dfs(root, index) {
+  //   if (!root) return [];
+  //   if (index >= res.length) res[index] = [];
+  //   res[index].push(root.val);
+  //   dfs(root.left, index + 1);
+  //   dfs(root.right, index + 1);
+  // }
+  // dfs(root, index);
   return res
 };
 // @lc code=end

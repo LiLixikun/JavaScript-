@@ -66,13 +66,31 @@
  * @return {boolean}
  */
 var isSameTree = function (p, q) {
-  function dfs(p, q) {
-    if (p == null && q == null) return true
-    else if (!p || !q) return false
-    else if (p.val !== q.val) return false
-    else return dfs(p.left,q.left) && dfs(p.right,q.right)
+  // function dfs(p, q) {
+  //   if (!p && !q) {
+  //     return true
+  //   }
+  //   else if (!p || !q || p.val !== q.val) return false
+  //   return dfs(p.left, q.left) && dfs(p.right, q.right)
+  // }
+  // return dfs(p,q)
+  if (!p && !q) {
+    return true
   }
-  return dfs(p,q)
+  let stack = [p, q]
+  while (stack.length) {
+    let node2 = stack.pop(); // q 的节点
+    let node1 = stack.pop(); // p 的节点
+    if (!node1 && !node2) continue
+    else if (!node1 || !node2 || node1.val !== node2.val) {
+      return false
+    }
+    stack.push(node1.left)
+    stack.push(node2.left)
+    stack.push(node1.right)
+    stack.push(node2.right)
+  }
+  return true
 };
 // @lc code=end
 

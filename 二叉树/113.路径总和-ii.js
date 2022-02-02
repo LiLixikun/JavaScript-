@@ -73,13 +73,12 @@
 var pathSum = function (root, targetSum) {
   if (!root) return []
   let res = []
-  function dfs(root, paths, sum) {
-    if (!root.left && !root.right && sum == targetSum) {
-      res.push([...paths])
-      return
+  function dfs(root, path, sum) {
+    if (root.left == null && root.right == null && sum == targetSum) {
+      res.push([...path])
     }
-    root.left && dfs(root.left, [...paths, root.left.val], sum + root.left.val)
-    root.right && dfs(root.right, [...paths, root.right.val], sum + root.right.val)
+    root.left && dfs(root.left, [...path, root.left.val], sum + root.left.val)
+    root.right && dfs(root.right, [...path, root.right.val], sum + root.right.val)
   }
   dfs(root, [root.val], root.val)
   return res

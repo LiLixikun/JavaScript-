@@ -70,13 +70,13 @@ var rightSideView = function (root) {
   if (!root) return res
   let stack = [root]
   while (stack.length) {
-    let len = stack.length
-    for (let i = 0; i < len; i++) {
-      const node = stack.shift()
+    let length = stack.length
+    for (let i = 0; i < length; i++) {
+      let node = stack.shift();
       node.left && stack.push(node.left)
       node.right && stack.push(node.right)
-      // 此时就是最右边
-      if (i == len - 1) {
+      // push 最后一位的数值
+      if (i == length - 1) {
         res.push(node.val)
       }
     }

@@ -62,23 +62,23 @@
  * @param {Node|null} root
  * @return {number[][]}https://learn.kaikeba.com/home
  */
-var levelOrder = function(root) {
-    let res = []
-    if(!root) return res
-    let stack = [root]
-    while (stack.length) {
-      let len = stack.length
-      let arr= []
-      for (let i = 0; i < len; i++) {
-        const node = stack.shift();
-        arr.push(node.val)
-        for (const child of node.children) {
-          stack.push(child)
-        }
+var levelOrder = function (root) {
+  let res = []
+  if (!root) return res
+  let stack = [root]
+  while (stack.length) {
+    let length = stack.length
+    let arr = []
+    for (let i = 0; i < length; i++) {
+      let node = stack.shift()
+      arr.push(node.val)
+      for (const child of node.children) {
+        stack.push(child)
       }
-      res.push(arr)
     }
-    return res
+    res.push(arr)
+  }
+  return res
 };
 // @lc code=end
 

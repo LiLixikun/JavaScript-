@@ -64,17 +64,18 @@ var minDepth = function (root) {
   if (!root) return deep;
   let stack = [root];
   while (stack.length) {
-    let len = stack.length;
-    deep++;
-    for (let i = 0; i < len; i++) {
+    let length = stack.length
+    deep++
+    for (let i = 0; i < length; i++) {
       const node = stack.shift();
+      // 叶子节点是指没有子节点的节点
       if (node.left == null && node.right == null) {
-        return deep;
+        return deep
       }
-      node.left && stack.push(node.left);
-      node.right && stack.push(node.right);
+      node.left && stack.push(node.left)
+      node.right && stack.push(node.right)
     }
   }
-  return deep;
+  return deep
 };
 // @lc code=end

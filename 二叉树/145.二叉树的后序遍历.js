@@ -46,21 +46,14 @@
 var postorderTraversal = function(root) {
   let res = []
   if (!root) return res
-  // function dfs(root) {
-  //   if(!root) return
-  //   dfs(root.left)
-  //   dfs(root.right)
-  //   res.push(root.val)
-  // }
-  // dfs(root)
   let stack = [root]
   while (stack.length) {
     const node = stack.pop()
-    res.unshift(node.val)
+    res.push(node.val)
     node.left && stack.push(node.left)
     node.right && stack.push(node.right)
   }
-  return res
+  return res.reverse()
 };
 // @lc code=end
 

@@ -80,17 +80,20 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var inorderTraversal = function(root) {
+var inorderTraversal = function (root) {
   let res = []
   let stack = []
-  while (root || stack.length) {
+  if (!root) return stack
+  while (stack.length || root) {
+    // 先左到底 入栈 左->右
     while (root) {
       stack.push(root)
       root = root.left
     }
-    root = stack.pop()
-    res.push(root.val)
-    root = root.right
+    // 出栈 左->中->右
+    const node = stack.pop()
+    res.push(node.val)
+    root = node.right
   }
   return res
 };

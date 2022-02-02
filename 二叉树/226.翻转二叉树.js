@@ -55,9 +55,30 @@
  */
 var invertTree = function (root) {
   if (!root) return null
-  let left = root.left
-  root.left = invertTree(root.right)
-  root.right = invertTree(left)
+  function inverNode(node) {
+    [node.left, node.right] = [node.right, node.left]
+  }
+  // 先进行节点交换
+  // root && inverNode(root)
+  // invertTree(root.left)
+  // invertTree(root.right)
+  let stack = [root]
+  // 前序层序遍历
+  while (stack.length) {
+    const node = stack.pop();
+    inverNode(node)
+    node.right && stack.push(node.right)
+    node.left && stack.push(node.left)
+  }
+  // while (stack.length) {
+  //   let length = stack.length
+  //   for (let i = 0; i < length; i++) {
+  //     const node = stack.shift()
+  //     inverNode(node)
+  //     node.left && stack.push(node.left)
+  //     node.right && stack.push(node.right)
+  //   }
+  // }
   return root
 };
 // @lc code=end

@@ -81,14 +81,17 @@
  * @return {number[]}
  */
 var preorderTraversal = function (root) {
+  let stack = []
+  if (!root) return stack
   let res = []
-  if(!root) return []
-  const stack = [root]
-  while(stack.length){
-     let node = stack.pop()
-     res.push(node.val)
-     node.right && stack.push(node.right)
-     node.left && stack.push(node.left)
+  stack = [root]
+  // 入栈 右->左
+  // 出栈 根->左->右
+  while (stack.length) {
+    const node = stack.pop();
+    res.push(node.val)
+    node.right && stack.push(node.right)
+    node.left && stack.push(node.left)
   }
   return res
 };

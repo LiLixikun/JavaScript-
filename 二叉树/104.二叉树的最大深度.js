@@ -59,6 +59,10 @@ var maxDepth = function (root) {
     }
   }
   return deep
+  // if (!root) {
+  //   return 0
+  // }
+  // return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
 };
 // @lc code=end
 

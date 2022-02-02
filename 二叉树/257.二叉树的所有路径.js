@@ -59,17 +59,38 @@
 var binaryTreePaths = function (root) {
   let res = []
   if (!root) return []
-  function dfs(root, str) {
-    if (root.left == null && root.right == null) {
-      str += root.val
-      res.push(str)
-      return
+  // 前序遍历
+  // function dfs(root, str) {
+  //   if (!root.left && !root.right) {
+  //     str += root.val
+  //     res.push(str)
+  //     return
+  //   }
+  //   // 单层的字符串累加
+  //   str += root.val + "->"
+  //   root.left && dfs(root.left, str)
+  //   root.right && dfs(root.right, str)
+  // }
+  // dfs(root, '')
+  let stack = [root]
+  let paths = [""]
+  while (stack.length) {
+    const node = stack.pop();
+    let path = paths.pop();
+    if (!node.left && !node.right) {
+      path += node.val
+      res.push(path)
     }
-    str += root.val + "->"
-    root.left && dfs(root.left, str)
-    root.right && dfs(root.right, str)
+    path += node.val + '->';
+    if (node.right) {
+      stack.push(node.right)
+      paths.push(path)
+    }
+    if (node.left) {
+      stack.push(node.left)
+      paths.push(path)
+    }
   }
-  dfs(root, "")
   return res
 };
 // @lc code=end
