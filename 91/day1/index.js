@@ -17,16 +17,16 @@ function addToArrayForm(num, k) {
 
 // 2.编程题
 //1.手写函数柯里化
-function curry(func) {
+function curry(func, args) {
   //此处补全
   let len = func.length;
-  let args = [];
+  args = args || [];
   return function () {
     newArgs = args.concat(Array.prototype.slice.call(arguments));
     if (newArgs.length < len) {
-      return curry.call(this, func);
+      return curry.call(this, func, newArgs);
     } else {
-      return func.call(this, newArgs);
+      return func.apply(this, newArgs);
     }
   };
 }
